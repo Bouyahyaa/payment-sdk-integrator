@@ -114,13 +114,22 @@ fun MerchantDashboard() {
             Button(
                 modifier = Modifier.fillMaxWidth(),
                 onClick = {
+                    log("\n--- Opening Terminal Settings ---")
+                    PaymentSDK.config.showSettings(context = context)
+                    log("⚙️ Settings UI launched.")
+                }
+            ) { Text("2. Show Terminal Settings") }
+
+            Button(
+                modifier = Modifier.fillMaxWidth(),
+                onClick = {
                     log("\n--- Checking Device Usability ---")
                     PaymentSDK.config.getUsabilityReport { report ->
                         log("NFC Supported: ${report.isNfcSupportedByDevice}")
                         log("Root / Attestation: ${report.keyAttestationResult}")
                     }
                 }
-            ) { Text("2. Check Device Usability") }
+            ) { Text("3. Check Device Usability") }
 
             Button(
                 modifier = Modifier.fillMaxWidth(),
@@ -146,7 +155,7 @@ fun MerchantDashboard() {
                         onError = { err -> handlePaymentError("Payment", err) }
                     )
                 }
-            ) { Text("3. Process Payment (€25.50)") }
+            ) { Text("4. Process Payment (€25.50)") }
 
             Button(
                 modifier = Modifier.fillMaxWidth(),
@@ -165,7 +174,7 @@ fun MerchantDashboard() {
                         onError = { err -> handlePaymentError("Refund", err) }
                     )
                 }
-            ) { Text("4. Refund Last Payment") }
+            ) { Text("5. Refund Last Payment") }
 
             Button(
                 modifier = Modifier.fillMaxWidth(),
@@ -178,7 +187,7 @@ fun MerchantDashboard() {
                         onError = { err -> handlePaymentError("Void", err) }
                     )
                 }
-            ) { Text("5. Void Last Transaction") }
+            ) { Text("6. Void Last Transaction") }
 
             Button(
                 modifier = Modifier.fillMaxWidth(),
@@ -197,7 +206,7 @@ fun MerchantDashboard() {
                         onError = { err -> handlePaymentError("History", err) }
                     )
                 }
-            ) { Text("6. Get Transaction History") }
+            ) { Text("7. Get Transaction History") }
 
             Button(
                 modifier = Modifier.fillMaxWidth(),
@@ -206,7 +215,7 @@ fun MerchantDashboard() {
                     val newLevel = PaymentSDK.hardware.setNfcChirpVolume(context, 5)
                     log("✅ NFC volume set to level $newLevel")
                 }
-            ) { Text("7. Maximize NFC Volume") }
+            ) { Text("8. Maximize NFC Volume") }
         }
 
         // --- Console Logs Area ---
